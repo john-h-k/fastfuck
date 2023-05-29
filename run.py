@@ -3,9 +3,11 @@
 import subprocess
 import time
 import matplotlib.pyplot as plt
-from tabulate import tabulate
 import sys
 import os
+
+from tabulate import tabulate
+from math import ceil
 
 # This script actually runs the benchmark and builds the data
 
@@ -40,6 +42,8 @@ def main():
     
     if len(sys.argv) == 1:
         directories = os.listdir("./languages")
+    elif len(sys.argv) == 2 and sys.argv[1] == "none":
+        directories = []
     else:
         directories = sys.argv[1:]
 
@@ -80,6 +84,12 @@ def main():
     if output:
         with open("table.md", "w") as f:
             f.write(table)
+
+    slow_langs = ["ruby", "python"]
+    slowest_not_slow = max(filter(lambda x: x[0] not in slow_langs, times.items()), key=lambda x: x[1])[1]
+
+    ax = plt.gca()
+    ax.set_ylim([0, int(ceil(slowest_not_slow * 1.3))])
 
     # Generate a bar chart of the times
     plt.bar(times.keys(), times.values())
