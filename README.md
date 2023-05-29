@@ -1,7 +1,7 @@
 <h1 align="center">fastfuck</h1>
 <div align="center">
  <strong>
-    Benchmarking languages with [Brainfuck](https://en.wikipedia.org/wiki/Brainfuck)
+  Benchmarking languages with <a href="https://en.wikipedia.org/wiki/Brainfuck">Brainfuck</a>
  </strong>
 </div>
 
