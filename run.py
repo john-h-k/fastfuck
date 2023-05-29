@@ -44,11 +44,11 @@ def main():
 
     # Run the bench command in each directory and record the time taken
     for directory in directories:
-        directory = os.path.join("languages", directory)
+        full_directory = os.path.join("languages", directory)
 
-        os.chdir(directory)
+        os.chdir(full_directory)
 
-        time_taken = run_bench(directory, benchmark)
+        time_taken = run_bench(full_directory, benchmark)
         times[directory] = time_taken
 
         os.chdir(cwd)

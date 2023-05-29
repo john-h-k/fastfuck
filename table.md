@@ -1,7 +1,7 @@
-| Directory            |     Time |
-|:---------------------|---------:|
-| languages/c          |  38.6404 |
-| languages/csharp     |  54.4207 |
-| languages/go         |  40.1612 |
-| languages/javascript | 125.634  |
-| languages/rust       |  40.7788 |
+| Directory   |     Time |
+|:------------|---------:|
+| c           |  38.6198 |
+| csharp      |  54.4177 |
+| go          |  40.1474 |
+| javascript  | 124.82   |
+| rust        |  40.9028 |
