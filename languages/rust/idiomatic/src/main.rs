@@ -1,6 +1,8 @@
-use std::io::{Read, Stderr, Stdin, Stdout, Write};
+use std::{
+    env, fs,
+    io::{self, Read, Write},
+};
 
-use anyhow::{bail, Result};
 use std::path::PathBuf;
 
 pub struct BrainfuckState {
@@ -16,7 +18,7 @@ enum CellOp {
 
 impl BrainfuckState {
     pub fn read_cur_cell(&self) -> u8 {
-        self.read_cell(self.pos)
+        *self.cells.get(self.pos).unwrap_or(&0u8)
     }
 
     fn set_cur_cell(&mut self, val: u8) {
@@ -37,26 +39,38 @@ impl BrainfuckState {
 }
 
 fn main() {
-    let program = fs::read_to_string(PathBuf::from(env::args()));
+    let program = fs::read_to_string(PathBuf::from(
+        env::args()
+            .nth(1)
+            .expect("Expected a single file to be passed"),
+    ))
+    .expect("Couldn't read file!");
+
+    let program = program.as_bytes();
 
     let mut instr_pointer = 0;
 
-    let mut stdout = self.stdout.lock();
-    let mut stdin = self.stdin.lock();
+    let mut state = BrainfuckState {
+        cells: Vec::new(),
+        pos: 0,
+    };
+
+    let mut stdout = io::stdout().lock();
+    let mut stdin = io::stdin().lock();
 
     while let Some(command) = program.get(instr_pointer) {
         match *command {
-            b'>' => self.state.pos += 1,
-            b'<' if self.state.pos == 0 => bail!(
+            b'>' => state.pos += 1,
+            b'<' if state.pos == 0 => panic!(
                 "Tried to decrement data pointer below 0 at position {}",
                 instr_pointer
             ),
-            b'<' => self.state.pos -= 1,
-            b'+' => self.state.modify_cur_cell(CellOp::Inc),
-            b'-' => self.state.modify_cur_cell(CellOp::Dec),
+            b'<' => state.pos -= 1,
+            b'+' => state.modify_cur_cell(CellOp::Inc),
+            b'-' => state.modify_cur_cell(CellOp::Dec),
             b'.' => {
                 stdout
-                    .write_all(&[self.state.read_cur_cell()])
+                    .write_all(&[state.read_cur_cell()])
                     .expect("writing to `stdout` failed");
             }
             b',' => {
@@ -65,10 +79,10 @@ fn main() {
                     .read_exact(&mut buff)
                     .expect("reading from `stdin` failed");
 
-                self.state.set_cur_cell(buff[0]);
+                state.set_cur_cell(buff[0]);
             }
 
-            b'[' if self.state.read_cur_cell() == 0 => {
+            b'[' if state.read_cur_cell() == 0 => {
                 let mut depth = 0;
                 let mut pos = instr_pointer;
 
@@ -85,13 +99,13 @@ fn main() {
                             instr_pointer = pos;
                             break;
                         }
-                        None => bail!("Unmatched '[' at position {}", instr_pointer),
+                        None => panic!("Unmatched '[' at position {}", instr_pointer),
                         _ => {}
                     }
                 }
             }
 
-            b']' if self.state.read_cur_cell() != 0 => {
+            b']' if state.read_cur_cell() != 0 => {
                 let mut depth = 0;
                 let mut pos = instr_pointer;
 
@@ -108,7 +122,7 @@ fn main() {
                             instr_pointer = pos;
                             break;
                         }
-                        None => bail!("Unmatched ']' at position {}", instr_pointer),
+                        None => panic!("Unmatched ']' at position {}", instr_pointer),
                         _ => {}
                     }
                 }

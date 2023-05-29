@@ -2,10 +2,10 @@
 
 case "$1" in
 	prepare)
-		cargo rustc --release --manifest-path rustfuck/Cargo.toml -- -C target-cpu=native
+		cargo rustc --release -- -C target-cpu=native
 		;;
 	run)
-		./rustfuck/target/release/rustfuck $2
+		./target/release/brainfuck $2
 		;;
 	*)
 		echo "bad command $1"
