@@ -6,11 +6,11 @@ Comparing language performance using brainfuck
 
 | Directory            |     Time |
 |:---------------------|---------:|
-| languages/c          |  38.5182 |
-| languages/csharp     |  54.3879 |
-| languages/go         |  40.1072 |
-| languages/javascript | 124.508  |
-| languages/rust       |  40.9104 |
+| C                    |  38.5182 |
+| C#                   |  54.3879 |
+| Go                   |  40.1072 |
+| JavaScript           | 124.508  |
+| Rust                 |  40.9104 |
 
 
 ![bar chart of results](bar_chart.png)
