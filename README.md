@@ -38,6 +38,8 @@ Absolutely - contributions are welcome. The structure for adding a new language 
 4. Test it and open a PR
 
 ## Results
+ 
+ > _(I have implemented Ruby and Python, but they take ~1 hour to run so I will have the times up once they are done)_
 
 | Directory            |     Time |
 |:---------------------|---------:|
