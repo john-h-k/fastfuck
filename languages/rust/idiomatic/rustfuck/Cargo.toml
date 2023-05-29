@@ -1,0 +1,13 @@
+[package]
+name = "rustfuck"
+version = "0.1.0"
+edition = "2021"
+
+authors = ["John Harry Kelly <johnharrykelly@gmail.com>"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.71"
+clap = { version = "4.3.0", features = ["derive"] }
+human-panic = "1.1.4"
