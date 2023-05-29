@@ -53,6 +53,15 @@ def main():
 
         os.chdir(cwd)
 
+    # Ultra-fragile code - relies one exact formatting of table.md
+    with open("table.md") as f:
+        preexisting = [[e.strip() for e in l.split("|")[1:3]] for l in f.readlines()[2:]]
+        preexisting = { lang : float(time) for lang, time in preexisting }
+
+
+    # Add the preexisting times for languages we haven't benched
+    times = preexisting | times
+
     # Print a markdown table of the times
     table = tabulate(times.items(), headers=["Directory", "Time"], tablefmt="pipe")
 
