@@ -11,6 +11,11 @@
 It also happens to be remarkably simple to write an interpreter for, and there are a vast library of preexisting brainfuck programs, so I thought
 it would be an interesting project to use as a language benchmark.
 
+For each language benchmarked, there are 2 versions:
+
+* `idiomatic` - this contains idiomatic, normal, clean code you'd expect in a professional environment, understandable by anyone familiar with the language
+* `optimised` - this contains hyper-optimised code which only has the aim of being as fast as possible - clarity/correctness be damned
+
 ### What this benchmark _does_ do
 
 * Shows the general order-of-magnitude performance of a languae
