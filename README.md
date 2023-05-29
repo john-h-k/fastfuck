@@ -7,7 +7,7 @@
 
 # The what and the why
 
-`Brainfuck` as a language is very similar to [```P`````](https://en.wikipedia.org/wiki/P′′), one of the simplest turing complete languages.
+`Brainfuck` as a language is very similar to [P``](https://en.wikipedia.org/wiki/P′′), one of the simplest turing complete languages.
 It also happens to be remarkably simple to write an interpreter for, and there is a vast library of preexisting brainfuck programs, so I thought
 it would be an interesting language to use as a language benchmark.
 
