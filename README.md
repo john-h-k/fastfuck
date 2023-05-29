@@ -13,4 +13,4 @@ Comparing language performance using brainfuck
 | languages/rust       |  40.9104 |
 
 
-[!bar chart of results](bar_chart.png)
+![bar chart of results](bar_chart.png)
