@@ -45,7 +45,6 @@ int main(int argc, char* argv[]) {
                          std::istreambuf_iterator<char>());
     
     State state;
-    std::stack<size_t> loop_stack;
     size_t instr_pointer = 0;
 
     while (instr_pointer < program.size()) {
@@ -77,21 +76,29 @@ int main(int argc, char* argv[]) {
                 state.writeCurCell(c);
                 break;
             case '[':
-                loop_stack.push(instr_pointer);
                 if (state.readCurCell() == 0) {
-                    int bracket_nesting = 1;
-                    while (bracket_nesting != 0) {
+                    int depth = 1;
+                    while (depth > 0 && instr_pointer < program.length()) {
                         instr_pointer++;
-                        if (program[instr_pointer] == '[') bracket_nesting++;
-                        if (program[instr_pointer] == ']') bracket_nesting--;
+                        if (program[instr_pointer] == '[') {
+                            depth++;
+                        } else if (program[instr_pointer] == ']') {
+                            depth--;
+                        }
                     }
                 }
                 break;
             case ']':
                 if (state.readCurCell() != 0) {
-                    instr_pointer = loop_stack.top();
-                } else {
-                    loop_stack.pop();
+                    int depth = 1;
+                    while (depth > 0 && instr_pointer >= 0) {
+                        instr_pointer--;
+                        if (program[instr_pointer] == ']') {
+                            depth++;
+                        } else if (program[instr_pointer] == '[') {
+                            depth--;
+                        }
+                    }
                 }
                 break;
             default:

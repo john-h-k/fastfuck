@@ -2,10 +2,11 @@
 
 case "$1" in
 	prepare)
-		clang++ -std=c++20 -Ofast -DNODEBUG brainfuck.cpp -o brainfuck
+		mkdir -p target
+		clang++ -std=c++20 -Ofast -DNODEBUG brainfuck.cpp -o target/brainfuck
 		;;
 	run)
-		./brainfuck $2
+		./target/brainfuck $2
 		;;
 	*)
 		echo "bad command $1"
