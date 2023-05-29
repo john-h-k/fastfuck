@@ -55,6 +55,7 @@ Absolutely - contributions are welcome. The structure for adding a new language 
 | Java        |   32.0129 |
 | C#          |   41.6299 |
 | JavaScript  |   95.9078 |
+| Ruby        | 4146.0210 |
 | Python      | 6163.0700 |
 
 ![bar chart of results](bar_chart.png)
