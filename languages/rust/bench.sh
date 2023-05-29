@@ -2,7 +2,7 @@
 
 case "$1" in
 	prepare)
-		cargo build --release --manifest-path rustfuck/Cargo.toml
+		cargo rustc --release --manifest-path rustfuck/Cargo.toml -- -C target-cpu=native
 		;;
 	run)
 		./rustfuck/target/release/rustfuck $2
