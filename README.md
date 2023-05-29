@@ -43,11 +43,12 @@ Absolutely - contributions are welcome. The structure for adding a new language 
 
 | Directory            |     Time |
 |:---------------------|---------:|
+| C++                  |  36.7070 |
 | C                    |  38.5182 |
 | Go                   |  40.1072 |
 | Rust                 |  40.9104 |
+| Java                 |  48.4277 |
 | C#                   |  54.3879 |
-| JavaScript           | 124.508  |
-
+| JavaScript           | 124.5080 |
 
 ![bar chart of results](bar_chart.png)
