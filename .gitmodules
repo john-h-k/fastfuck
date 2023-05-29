@@ -1,0 +1,3 @@
+[submodule "languages/rust/rustfuck"]
+	path = languages/rust/rustfuck
+	url = https://github.com/john-h-k/rustfuck
