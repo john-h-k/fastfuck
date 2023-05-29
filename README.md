@@ -43,8 +43,8 @@ Absolutely - contributions are welcome. The structure for adding a new language 
 
 | Directory   |    Time |
 |:------------|--------:|
-| C           | 29.3115 |
 | C++         | 27.7329 |
+| C           | 29.3115 |
 | Go          | 30.7541 |
 | Rust        | 31.0722 |
 | Java        | 32.0129 |
