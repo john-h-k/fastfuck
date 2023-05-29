@@ -68,10 +68,10 @@ def main():
     plt.ylabel("Time (s)")
     plt.title("Bench Time for Each Directory")
 
-    plt.show()
-
     if output:
         plt.savefig("bar_chart.png")
+
+    plt.show()
 
 if __name__ == "__main__":
     main()
