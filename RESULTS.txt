@@ -1,2 +1,7 @@
 
 c -- 38
+c -- 39
+csharp -- 55
+go -- 40
+javascript -- 126
+rust -- 41

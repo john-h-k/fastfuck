@@ -3,8 +3,7 @@ using System.IO;
 
 public class Program
 {
-    private const int MAX_CELL_SIZE = 30000;
-    private static int[] cells = new int[MAX_CELL_SIZE];
+    private static int[] cells = new int[0];
     private static int pos = 0;
 
     static void Main(string[] args)
