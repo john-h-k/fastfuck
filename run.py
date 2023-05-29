@@ -22,6 +22,16 @@ def run_bench(directory, benchmark):
     return end - start
 
 def main():
+    first = sys.argv.pop(1)
+
+    if first in ["i", "idiomatic"]:
+        target = "idiomatic"
+    elif first in ["o", "optimised"]:
+        target = "optimised"
+    else:
+        print("ERROR: Expected one of 'i'/'idiomatic' or 'o'/'optimised'")
+        exit(1)
+    
     # 11/10 flag handling here
     output = False
     if "--output" in sys.argv:
@@ -44,7 +54,7 @@ def main():
 
     # Run the bench command in each directory and record the time taken
     for directory in directories:
-        full_directory = os.path.join("languages", directory)
+        full_directory = os.path.join("languages", directory, target)
 
         os.chdir(full_directory)
 
