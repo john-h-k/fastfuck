@@ -46,14 +46,15 @@ Absolutely - contributions are welcome. The structure for adding a new language 
  
  > _(I have implemented Ruby and Python, but they take ~1 hour to run so I will have the times up once they are done)_
 
-| Directory   |    Time |
-|:------------|--------:|
-| C++         | 27.7329 |
-| C           | 29.3115 |
-| Go          | 30.7541 |
-| Rust        | 31.0722 |
-| Java        | 32.0129 |
-| C#          | 41.6299 |
-| JavaScript  | 95.9078 |
+| Directory   |      Time |
+|:------------|----------:|
+| C++         |   27.7329 |
+| C           |   29.3115 |
+| Go          |   30.7541 |
+| Rust        |   31.0722 |
+| Java        |   32.0129 |
+| C#          |   41.6299 |
+| JavaScript  |   95.9078 |
+| Python      | 6163.0700 |
 
 ![bar chart of results](bar_chart.png)
