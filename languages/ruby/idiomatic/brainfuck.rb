@@ -17,8 +17,8 @@ State = Struct.new(:cells, :pos) do
     self.cells[self.pos] = value
   end
 
-  def inc_cur_cell() = self.write_cur_cell(self.read_cur_cell + 1)
-  def dec_cur_cell() = self.write_cur_cell(self.read_cur_cell - 1)
+  def inc_cur_cell() = self.write_cur_cell((self.read_cur_cell + 1) % 256)
+  def dec_cur_cell() = self.write_cur_cell((self.read_cur_cell - 1) % 256)
 end
 
 program = IO.read(ARGV.first)

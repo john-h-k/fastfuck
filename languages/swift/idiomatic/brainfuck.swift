@@ -22,11 +22,11 @@ func writeCurCell(_ state: inout State, value: UInt8) {
 }
 
 func incCurCell(_ state: inout State) {
-    writeCurCell(&state, value: readCurCell(&state) + 1)
+    writeCurCell(&state, value: readCurCell(&state) &+ 1)
 }
 
 func decCurCell(_ state: inout State) {
-    writeCurCell(&state, value: readCurCell(&state) - 1)
+    writeCurCell(&state, value: readCurCell(&state) &- 1)
 }
 
 func main(args: [String]) {
@@ -44,12 +44,10 @@ func main(args: [String]) {
 
 	let program = [UInt8](program_str.utf8);
 
-    let filesize = program.count
-
     var state = State()
     var instr_pointer = 0
 
-    while instr_pointer < filesize {
+    while instr_pointer < program.count {
         let command = program[instr_pointer]
 
         switch UnicodeScalar(command) {
@@ -71,7 +69,7 @@ func main(args: [String]) {
         case "[":
             if readCurCell(&state) == 0 {
                 var depth = 1
-                while depth > 0 && instr_pointer < filesize {
+                while depth > 0 && instr_pointer < program.count {
                     instr_pointer += 1
                     if UnicodeScalar(program[instr_pointer]) == "[" {
                         depth += 1
