@@ -55,5 +55,6 @@ Absolutely - contributions are welcome. The structure for adding a new language 
 | JavaScript  |   95.9078 |
 | Ruby        | 4146.0210 |
 | Python      | 6163.0700 |
+| Bash        | ~150 days | _(extrapolated)_
 
 ![bar chart of results](bar_chart.png)
