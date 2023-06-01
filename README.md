@@ -49,8 +49,9 @@ Absolutely - contributions are welcome. The structure for adding a new language 
 | C++         |   27.7329 |
 | C           |   29.3115 |
 | Go          |   30.7541 |
-| Rust        |   31.0722 |
+| Rust        |   31.0722 | 
 | Java        |   32.0129 |
+| Swift       |   36.3749 |
 | C#          |   41.6299 |
 | JavaScript  |   95.9078 |
 | Ruby        | 4146.0210 |
