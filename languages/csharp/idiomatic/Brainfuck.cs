@@ -1,42 +1,50 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 public class Program
 {
-    private static int[] cells = new int[0];
-    private static int pos = 0;
-
-    static void Main(string[] args)
+    public static void Main(string[] args)
     {
         if (args.Length != 1)
         {
             Error("You must provide a filename as an argument");
         }
 
-        string program;
+        var program = LoadFile(args[0]);
+        RunLoop(program);
+    }
+
+    static string LoadFile(string filePath)
+    {
         try
         {
-            program = File.ReadAllText(args[0]);
+            return File.ReadAllText(filePath);
         }
         catch
         {
-            Error("Could not open file");
-            return;
+            Error("Could not load file");
+            return null!;
         }
+    }
 
-        int instr_pointer = 0;
+    public static void RunLoop(string program)
+    {
+        var pos = 0;
+        var instr_pointer = 0;
+        var cells = new int[512];
 
         while (instr_pointer < program.Length)
         {
-            char command = program[instr_pointer];
+            var command = program[instr_pointer];
 
             switch (command)
             {
                 case '+':
-                    WriteCurCell(ReadCurCell() + 1);
+                    WriteCurCell(pos, ref cells, ReadCurCell(pos, cells) + 1);
                     break;
                 case '-':
-                    WriteCurCell(ReadCurCell() - 1);
+                    WriteCurCell(pos, ref cells, ReadCurCell(pos, cells) - 1);
                     break;
                 case '>':
                     pos++;
@@ -49,43 +57,45 @@ public class Program
                     pos--;
                     break;
                 case '.':
-                    Console.Write((char)ReadCurCell());
+                    Console.Write((char)ReadCurCell(pos, cells));
                     break;
                 case ',':
-                    WriteCurCell(Console.Read());
+                    WriteCurCell(pos, ref cells, Console.Read());
                     break;
                 case '[':
-                    if (ReadCurCell() == 0)
+                    if (ReadCurCell(pos, cells) == 0)
                     {
-                        int depth = 1;
+                        var depth = 1;
                         while (depth > 0 && instr_pointer < program.Length)
                         {
                             instr_pointer++;
-                            if (program[instr_pointer] == '[')
+                            switch (program[instr_pointer])
                             {
-                                depth++;
-                            }
-                            else if (program[instr_pointer] == ']')
-                            {
-                                depth--;
+                                case '[':
+                                    depth++;
+                                    break;
+                                case ']':
+                                    depth--;
+                                    break;
                             }
                         }
                     }
                     break;
                 case ']':
-                    if (ReadCurCell() != 0)
+                    if (ReadCurCell(pos, cells) != 0)
                     {
-                        int depth = 1;
+                        var depth = 1;
                         while (depth > 0 && instr_pointer >= 0)
                         {
                             instr_pointer--;
-                            if (program[instr_pointer] == ']')
+                            switch (program[instr_pointer])
                             {
-                                depth++;
-                            }
-                            else if (program[instr_pointer] == '[')
-                            {
-                                depth--;
+                                case ']':
+                                    depth++;
+                                    break;
+                                case '[':
+                                    depth--;
+                                    break;
                             }
                         }
                     }
@@ -96,9 +106,9 @@ public class Program
         }
     }
 
-    static int ReadCurCell()
+    public static int ReadCurCell(int pos, int[] cells)
     {
-        if (pos >= cells.Length)
+        if ((uint)pos >= (uint)cells.Length)
         {
             return 0;
         }
@@ -108,13 +118,23 @@ public class Program
         }
     }
 
-    static void WriteCurCell(int value)
-    {
-        if (pos >= cells.Length)
-        {
-            Array.Resize(ref cells, pos + 1);
-        }
 
+    public static void WriteCurCell(int pos, ref int[] cells, int value)
+    {
+        var cells1 = cells;
+        if ((uint)pos >= (uint)cells1.Length)
+        {
+            WriteCurCellWithResize(pos, ref cells, value);
+        }
+        else
+        {
+            cells1[pos] = value;
+        }
+    }
+
+    private static void WriteCurCellWithResize(int pos, ref int[] cells, int value)
+    {
+        Array.Resize(ref cells, pos * 2);
         cells[pos] = value;
     }
 
